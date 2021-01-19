@@ -35,6 +35,10 @@ public class InventoryController {
         }
     }
 
+    public InventoryController(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
 
     public boolean validInput(String input) {
         Pattern validPattern = Pattern.compile("^([SIH]{1}\\d{1,6})$|^L$");

@@ -5,6 +5,7 @@ package src.test.java.lagersaldo;
 
 import java.util.Scanner;
 
+import src.main.java.lagersaldo.Inventory;
 import src.main.java.lagersaldo.InventoryController;
 
 
@@ -16,8 +17,8 @@ public class App {
         System.out.println("Please enter your name: ");
         String name = in.nextLine();
         System.out.println("You entered " + name);
-        
-        InventoryController controller = new InventoryController();
+        Inventory inventory = new Inventory();
+        InventoryController controller = new InventoryController(inventory);
         while (true) {
             String input = in.nextLine();
             try {
