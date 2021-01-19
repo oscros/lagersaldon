@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 public class InventoryTest {
 
-    @ParameterizedTest(name = "adding {0} to the inventory")
+    @ParameterizedTest(name = "Should return the inventory \'{0}\'")
     @ValueSource(ints = { 0, 100, 1000000 })
     public void testGetInventory(int actualQuantity) {
         Inventory inventory = new Inventory();
@@ -32,7 +32,7 @@ public class InventoryTest {
         assertEquals(0, inventory.getInventory());
     }
 
-    @ParameterizedTest(name = "adding {0} to the inventory")
+    @ParameterizedTest(name = "Should add \'{0}\' to the inventory")
     @ValueSource(ints = { 0, 100, 1000000 })
     public void testAddInventory(int actualQuantity) {
         Inventory inventory = new Inventory();
@@ -50,7 +50,7 @@ public class InventoryTest {
         });
     }
 
-    @ParameterizedTest(name = "adding {0} to the inventory")
+    @ParameterizedTest(name = "Should remove \'{0}\' to the inventory")
     @ValueSource(ints = { 0, 100, 10000000 })
     public void testSuccessfullRemoveInventory(int quantityToRemove) throws IllegalArgumentException {
         Inventory inventory = new Inventory();
@@ -61,7 +61,7 @@ public class InventoryTest {
         assertEquals(0, inventory.getInventory());
     }
 
-    @ParameterizedTest(name = "adding {0} to the inventory")
+    @ParameterizedTest(name = "Should throw exception when removing \'{0}\' from the inventory")
     @ValueSource(ints = { -100, 100, 10000000 })
     public void testUnsuccessfullRemoveInventory(int quantityToRemove) {
         Inventory inventory = new Inventory();

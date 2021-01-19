@@ -4,87 +4,108 @@
 package src.test.java.lagersaldo;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import javax.annotation.meta.When;
 import javax.imageio.IIOException;
 
 // import static org.junit.jupiter.params.provider.ValueSource;
 // import static org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.junit.jupiter.params.provider.EmptySource;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
+import src.main.java.lagersaldo.Inventory;
 import src.main.java.lagersaldo.InventoryController;
 
 
 public class InventoryControllerTest {
+    
+    private Inventory mockInventory;
 
-    @ParameterizedTest(name = "testing the valid input {0}")
+    @BeforeEach
+    public void initEach() {
+        mockInventory = mock(Inventory.class);       
+    }
+
+    @ParameterizedTest(name = "Should return true if valid input \'{0}\' is passed as input")
     @ValueSource(strings = { "S1", "I2", "L", "S100000", "I20000" })
     public void testValidInput(String input) {
-        InventoryController controller = new InventoryController();
+        InventoryController controller = new InventoryController(mockInventory);
         boolean result = controller.validInput(input);
         assertTrue(result);
     }
 
-    @ParameterizedTest(name = "testing the invalid input {0}")
+    @ParameterizedTest(name = "Should return false if invalid input \'{0}\' is passed as input")
     @EmptySource
     @ValueSource(strings = { "S-1", "S", "I-1", "I", "L123" })
     public void testInvalidInput(String input) {
-        InventoryController controller = new InventoryController();
+        InventoryController controller = new InventoryController(mockInventory);
         boolean result = controller.validInput(input);
         assertFalse(result);
     }
 
-    @ParameterizedTest(name = "testing performing valid and allowed action {0}")
+    @ParameterizedTest(name = "Should return \"OK\" if valid deposit/print action \'{0}\' is passed as input")
     @ValueSource(strings = { "I2", "L", "I20000" })
-    public void testValidPerformAction(String input) {
-        InventoryController controller = new InventoryController();
+    public void testValidDepositAction(String input) {
+        InventoryController controller = new InventoryController(mockInventory);
+        doAnswer(new Answer<Void>(){
+            public Void answer(InvocationOnMock invocation) {
+                return null;
+            }
+        }).when(mockInventory).addInventory(anyInt());
 
         String result = controller.performAction(input);
 
         assertTrue(result.length() > 0);
     }
 
-    @ParameterizedTest(name = "testing valid Sell action {0}")
+    @ParameterizedTest(name = "Should return \"OK\" if valid sell action \'{0}\' is passed as input")
     @ValueSource(strings = { "S1", "S20000" })
     public void testAllowedSellAction(String input) {
-        InventoryController controller = new InventoryController();
-        controller.performAction("I20000");
+        doAnswer(new Answer<Void>() {
+            public Void answer(InvocationOnMock invocation) {
+                return null;
+            }
+        }).when(mockInventory).removeInventory(anyInt());
+        InventoryController controller = new InventoryController(mockInventory);
+
         String result = controller.performAction(input);
 
         assertTrue(result.length() > 0);
     }
 
-    @ParameterizedTest(name = "testing valid but not allowed action {0}")
-    @ValueSource(strings = { "S1", "S20000" })
+    @ParameterizedTest(name = "Should throw exception if Inventory throws exception")
+    @ValueSource(strings = { "S1", "S20000", "I-1" })
     public void testNotAllowedSellAction(String input) {
-        InventoryController controller = new InventoryController();
+        doThrow(new IllegalArgumentException("mock exception")).when(mockInventory).removeInventory(anyInt());
+        doThrow(new IllegalArgumentException("mock exception")).when(mockInventory).addInventory(anyInt());
+        InventoryController controller = new InventoryController(mockInventory);
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             String result = controller.performAction(input);
         });
     }
 
-    @ParameterizedTest(name = "testing performing invalid action {0}")
+
+    @ParameterizedTest(name = "Should throw exception when invalid input \'{0}\' is passed")
     @EmptySource
     @ValueSource(strings = { "S-1", "S", "I-1", "I", "L123" })
     public void testInvalidPerformAction(String input) {
-        InventoryController controller = new InventoryController();
+        InventoryController controller = new InventoryController(mockInventory);
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             String result = controller.performAction(input);
         });
     }
-
-    // @Test
-    // public void testGetAction() throws IIOException{
-    //     InventoryAction actual = InputHandler.getAction("S1");
-
-    //     assertEquals("S", actual.getType());
-    //     assertEquals("1", actual.getQuantity());
-    // }
-
-
 }
