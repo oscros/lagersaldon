@@ -14,21 +14,15 @@ public class App {
     public static void main(String[] args) {
 
         Scanner in = new Scanner(System.in);
-        System.out.println("Please enter your name: ");
-        String name = in.nextLine();
-        System.out.println("You entered " + name);
         Inventory inventory = new Inventory();
         InventoryController controller = new InventoryController(inventory);
         while (true) {
             String input = in.nextLine();
             try {
-                controller.performAction(input);
+                String result = controller.performAction(input);
+                System.out.println(result);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
-            }
-            if (controller.validInput(input)) {
-            } else {
-                System.out.println("Invalid pattern!");
             }
         }
     }
