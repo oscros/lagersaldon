@@ -6,8 +6,8 @@
 
 ## building project
     ./gradlew assemble
-Creates C:\github\lagersaldo\build\distributions\lagersaldo.zip 
-that includes bin\lagersaldo.exe to be dubbleclicked
+Creates \build\distributions\lagersaldo.zip 
+which contains bin\lagersaldo.exe
 
 ## Running tests
     ./gradlew clean test
