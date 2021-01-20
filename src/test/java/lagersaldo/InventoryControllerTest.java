@@ -3,54 +3,30 @@
  */
 package src.test.java.lagersaldo;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-import javax.annotation.meta.When;
-import javax.imageio.IIOException;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.junit.jupiter.params.provider.EmptySource;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
-import src.main.java.lagersaldo.Inventory;
+import src.main.java.lagersaldo.IInventory;
 import src.main.java.lagersaldo.InventoryController;
-
 
 public class InventoryControllerTest {
     
-    private Inventory mockInventory;
+    private IInventory mockInventory;
 
     @BeforeEach
     public void initEach() {
-        mockInventory = mock(Inventory.class);       
-    }
-
-    @ParameterizedTest(name = "Should return true if valid input \"{0}\" is passed as input")
-    @ValueSource(strings = { "S1", "I2", "L", "S100000", "I20000" })
-    public void testValidInput(String input) {
-        InventoryController controller = new InventoryController(mockInventory);
-        boolean result = controller.validInput(input);
-        assertTrue(result);
-    }
-
-    @ParameterizedTest(name = "Should return false if invalid input \"{0}\" is passed as input")
-    @EmptySource
-    @ValueSource(strings = { "S-1", "S", "I-1", "I", "L123" })
-    public void testInvalidInput(String input) {
-        InventoryController controller = new InventoryController(mockInventory);
-        boolean result = controller.validInput(input);
-        assertFalse(result);
+        mockInventory = mock(IInventory.class);       
     }
 
     @ParameterizedTest(name = "Should return \"OK\" if valid deposit/print action \"{0}\" is passed as input")
