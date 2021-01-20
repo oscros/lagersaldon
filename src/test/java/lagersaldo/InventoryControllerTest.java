@@ -38,7 +38,7 @@ public class InventoryControllerTest {
         mockInventory = mock(Inventory.class);       
     }
 
-    @ParameterizedTest(name = "Should return true if valid input \'{0}\' is passed as input")
+    @ParameterizedTest(name = "Should return true if valid input \"{0}\" is passed as input")
     @ValueSource(strings = { "S1", "I2", "L", "S100000", "I20000" })
     public void testValidInput(String input) {
         InventoryController controller = new InventoryController(mockInventory);
@@ -46,7 +46,7 @@ public class InventoryControllerTest {
         assertTrue(result);
     }
 
-    @ParameterizedTest(name = "Should return false if invalid input \'{0}\' is passed as input")
+    @ParameterizedTest(name = "Should return false if invalid input \"{0}\" is passed as input")
     @EmptySource
     @ValueSource(strings = { "S-1", "S", "I-1", "I", "L123" })
     public void testInvalidInput(String input) {
@@ -55,7 +55,7 @@ public class InventoryControllerTest {
         assertFalse(result);
     }
 
-    @ParameterizedTest(name = "Should return \"OK\" if valid deposit/print action \'{0}\' is passed as input")
+    @ParameterizedTest(name = "Should return \"OK\" if valid deposit/print action \"{0}\" is passed as input")
     @ValueSource(strings = { "I2", "L", "I20000" })
     public void testValidDepositAction(String input) {
         InventoryController controller = new InventoryController(mockInventory);
@@ -70,7 +70,7 @@ public class InventoryControllerTest {
         assertTrue(result.length() > 0);
     }
 
-    @ParameterizedTest(name = "Should return \"OK\" if valid sell action \'{0}\' is passed as input")
+    @ParameterizedTest(name = "Should return \"OK\" if valid sell action \"{0}\" is passed as input")
     @ValueSource(strings = { "S1", "S20000" })
     public void testAllowedSellAction(String input) {
         doAnswer(new Answer<Void>() {
@@ -98,7 +98,7 @@ public class InventoryControllerTest {
     }
 
 
-    @ParameterizedTest(name = "Should throw exception when invalid input \'{0}\' is passed")
+    @ParameterizedTest(name = "Should throw exception when invalid input \"{0}\" is passed")
     @EmptySource
     @ValueSource(strings = { "S-1", "S", "I-1", "I", "L123" })
     public void testInvalidPerformAction(String input) {
