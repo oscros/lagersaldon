@@ -10,7 +10,7 @@ public class InventoryController {
 
     private Inventory inventory = new Inventory();
 
-    class InventoryAction {
+    static class InventoryAction {
         private String type;
         private int quantity;
 

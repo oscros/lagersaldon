@@ -41,13 +41,11 @@ run {
     standardInput = System.in
 }
 
-
 test {
     useJUnitPlatform()
 
     testClassesDirs = sourceSets.test.output
     classpath = sourceSets.test.runtimeClasspath
-
 }
 
 // sourceSets.main.java.srcDirs = ['src']

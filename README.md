@@ -5,9 +5,9 @@
     ./gradlew run
 
 ## building project
-    ./gradlew assemble
+    ./gradlew build
 Creates \build\distributions\lagersaldo.zip 
-which contains bin\lagersaldo.exe
+which contains the executable bin\lagersaldo
 
 ## Running tests
     ./gradlew clean test
