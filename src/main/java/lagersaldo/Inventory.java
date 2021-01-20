@@ -1,7 +1,5 @@
 package src.main.java.lagersaldo;
 
-import java.util.ArrayList;
-
 public class Inventory {
 
     private int inventory;
@@ -24,7 +22,7 @@ public class Inventory {
         return false;
     }
 
-    public void addInventory(int quantity) {
+    public void addInventory(int quantity) throws IllegalArgumentException {
         if (isDepositValid(quantity)) {
             inventory += quantity;
         } else {
