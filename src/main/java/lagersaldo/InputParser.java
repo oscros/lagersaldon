@@ -14,20 +14,31 @@ public class InputParser {
         return false;
     }
 
-    public static InventoryAction parseInput(String input) throws IllegalArgumentException {
+    public static IInventoryAction parseInput(String input) throws IllegalArgumentException {
         if (!validInput(input)) {
             throw new IllegalArgumentException("Invalid input: " + input);
         }
-        if (input.equals("L")) {
-            return new InventoryAction(input);
+        if (input.length() == 1) {
+            switch (input) {
+                case "L":
+                    return new RetrieveInventoryAction();
+                default:
+                    throw new IllegalArgumentException("Invalid input: " + input);
+            }
         }
 
         StringBuilder sb = new StringBuilder(input);
         String actionString = sb.substring(0, 1);
         String quantityString = sb.substring(1);
         int quantity = Integer.parseInt(quantityString);
-
-        return new InventoryAction(actionString, quantity);
+        switch (actionString) {
+            case "S":
+                return new SellInventoryAction(quantity);
+            case "I":
+                return new DeliverInventoryAction(quantity);
+            default:
+                throw new IllegalArgumentException("Invalid input: " + input);
+        }
     }
 
 }

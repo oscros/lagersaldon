@@ -9,27 +9,33 @@ import org.junit.jupiter.params.provider.EmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import src.main.java.lagersaldo.InputParser;
-import src.main.java.lagersaldo.InventoryAction;
+import src.main.java.lagersaldo.RetrieveInventoryAction;
+import src.main.java.lagersaldo.SellInventoryAction;
+import src.main.java.lagersaldo.IInventoryAction;
+import src.main.java.lagersaldo.SellInventoryAction;
+import src.main.java.lagersaldo.DeliverInventoryAction;
+import src.main.java.lagersaldo.RetrieveInventoryAction;
 
 public class InputParserTest {
 
-    @ParameterizedTest(name = "Should return correct InventoryAction when parsing valid input \"{0}\"")
-    @ValueSource(strings = { "S1", "I2", "S100000", "I20000" })
-    public void testParseInput(String input) {
-        StringBuilder sb = new StringBuilder(input);
-        String actionString = sb.substring(0, 1);
-        String quantityString = sb.substring(1);
-        int quantity = Integer.parseInt(quantityString);
+    @ParameterizedTest(name = "Should return SellInventoryAction when parsing valid Sell command \"{0}\"")
+    @ValueSource(strings = { "S1", "S100000"})
+    public void testParseSellCommand(String input) {
+        IInventoryAction action = InputParser.parseInput(input);
+        assertEquals(SellInventoryAction.class, action.getClass());
+    }
 
-        InventoryAction action = InputParser.parseInput(input);
-        assertEquals(actionString, action.getType());
-        assertEquals(quantity, action.getQuantity());
+    @ParameterizedTest(name = "Should return DeliverInventoryAction when parsing valid Deliver command \"{0}\"")
+    @ValueSource(strings = { "I1", "I100000" })
+    public void testParseDeliverCommand(String input) {
+        IInventoryAction action = InputParser.parseInput(input);
+        assertEquals(DeliverInventoryAction.class, action.getClass());
     }
 
     @Test
-    public void testParsePrintAction() {
-        InventoryAction action = InputParser.parseInput("L");
-        assertEquals("L", action.getType());
+    public void testParseRetriveInventoryCommand() {
+        IInventoryAction action = InputParser.parseInput("L");
+        assertEquals(RetrieveInventoryAction.class, action.getClass());
     }
 
     @ParameterizedTest(name = "Should throw exception when parsing invalid input \"{0}\"")
@@ -37,7 +43,7 @@ public class InputParserTest {
     @ValueSource(strings = { "S-1", "I-1", "I", "S", "L200" })
     public void testParseBadInput(String input) {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            InventoryAction action = InputParser.parseInput(input);
+            IInventoryAction action = InputParser.parseInput(input);
         });
     }
 

@@ -8,12 +8,13 @@ public class App {
 
         Scanner in = new Scanner(System.in);
         IInventory inventory = new Inventory();
-        InventoryController controller = new InventoryController(inventory);
         while (true) {
             String input = in.nextLine();
             try {
-                String result = controller.performAction(input);
-                System.out.println(result);
+                IInventoryAction action = InputParser.parseInput(input);
+                action.doAction(inventory);
+                View.printResult(action);
+                System.out.println();
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
