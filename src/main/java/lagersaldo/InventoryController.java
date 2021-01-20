@@ -41,10 +41,9 @@ public class InventoryController {
 
 
     public boolean validInput(String input) {
-        Pattern validPattern = Pattern.compile("^([SIH]{1}\\d{1,6})$|^L$");
+        Pattern validPattern = Pattern.compile("^([SI]{1}\\d{1,6})$|^L$");
         Matcher matcher = validPattern.matcher(input);
         if (matcher.find()) {
-            System.out.println("Found matching pattern:");
             return true;
         }
         return false;
@@ -81,9 +80,6 @@ public class InventoryController {
                 return "OK";
             case "L":
                 return "Current inventory: " + inventory.getInventory();
-            case "H":
-                inventory.addInventory(10);
-                return "OK";
             default:
                 throw new IllegalArgumentException("Invalid action type");
         }
