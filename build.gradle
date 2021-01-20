@@ -34,7 +34,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClassName = 'lagersaldo.App'
+    mainClassName = 'src.test.java.lagersaldo.App'
 }
 
 run {
