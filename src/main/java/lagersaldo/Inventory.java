@@ -1,6 +1,6 @@
 package src.main.java.lagersaldo;
 
-public class Inventory {
+public class Inventory implements IInventory {
 
     private int inventory;
 
