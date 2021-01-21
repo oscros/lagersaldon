@@ -1,4 +1,4 @@
-package src.main.java.lagersaldo;
+package lagersaldo;
 
 public interface IInventory {
     public void addInventory(int quantity);

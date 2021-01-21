@@ -11,8 +11,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import src.main.java.lagersaldo.Inventory;
-import src.main.java.lagersaldo.DeliverInventoryAction;
+
 public class DeliverInventoryTest {
     @Test
     public void testDoAction() {

@@ -17,12 +17,7 @@ import static org.mockito.Mockito.when;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import src.main.java.lagersaldo.View;
-import src.main.java.lagersaldo.IInventoryAction;
-import src.main.java.lagersaldo.Inventory;
-import src.main.java.lagersaldo.RetrieveInventoryAction;
-import src.main.java.lagersaldo.SellInventoryAction;
-import src.main.java.lagersaldo.DeliverInventoryAction;
+
 public class ViewTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();

@@ -1,4 +1,4 @@
-package src.main.java.lagersaldo;
+package lagersaldo;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
