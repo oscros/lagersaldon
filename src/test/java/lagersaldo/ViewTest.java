@@ -17,7 +17,6 @@ import static org.mockito.Mockito.when;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-
 public class ViewTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -53,11 +52,9 @@ public class ViewTest {
     public void testPrintDeliverResult() {
         DeliverInventoryAction deliverAction = new DeliverInventoryAction(10);
         Inventory mockInventory = mock(Inventory.class);
-        doAnswer(new Answer<Void>() {
-            public Void answer(InvocationOnMock invocation) {
-                return null;
-            }
-        }).when(mockInventory).removeInventory(anyInt());
+        doAnswer(invocation -> {
+            return null;
+        }).when(mockInventory).removeItems(anyInt());
 
         deliverAction.doAction(mockInventory);
         // System.setOut(originalOut);
@@ -74,11 +71,9 @@ public class ViewTest {
     public void testPrintSellResult() {
         SellInventoryAction sellAction = new SellInventoryAction(10);
         Inventory mockInventory = mock(Inventory.class);
-        doAnswer(new Answer<Void>() {
-            public Void answer(InvocationOnMock invocation) {
-                return null;
-            }
-        }).when(mockInventory).removeInventory(anyInt());
+        doAnswer(invocation -> {
+            return null;
+        }).when(mockInventory).removeItems(anyInt());
 
         sellAction.doAction(mockInventory);
         // System.setOut(originalOut);
