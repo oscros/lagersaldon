@@ -56,7 +56,7 @@ public class InventoryTest {
         assertEquals(0, inventory.getInventory());
     }
 
-    @ParameterizedTest(name = "Should throw exception when removing \"{0}\" from the inventory")
+    @ParameterizedTest(name = "Should throw exception when removing  \"{0}\" from inventory containing 0")
     @ValueSource(ints = { -100, 100, 10000000 })
     public void testUnsuccessfullRemoveInventory(int quantityToRemove) {
         Inventory inventory = new Inventory();

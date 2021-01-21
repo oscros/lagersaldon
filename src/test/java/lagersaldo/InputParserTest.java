@@ -33,7 +33,7 @@ public class InputParserTest {
 
     @ParameterizedTest(name = "Should throw exception when parsing invalid input \"{0}\"")
     @EmptySource
-    @ValueSource(strings = { "S-1", "I-1", "I", "S", "L200" })
+    @ValueSource(strings = { "S-1", "I-1", "I", "S", "L200", "Q" })
     public void testParseBadInput(String input) {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             IInventoryAction action = InputParser.parseInput(input);
