@@ -47,6 +47,3 @@ test {
     testClassesDirs = sourceSets.test.output
     classpath = sourceSets.test.runtimeClasspath
 }
-
-// sourceSets.main.java.srcDirs = ['src']
-// sourceSets.test.java.srcDirs = ['tst']

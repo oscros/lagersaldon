@@ -13,7 +13,6 @@ The inventory always start at 0 when the program starts.
 1. User cannot sell or deliver a negative number of goods.
 2. User cannot overdraw the inventory by selling more goods than are currently in it.
 
-
 ## Running project locally with gradle
     ./gradlew run
 
