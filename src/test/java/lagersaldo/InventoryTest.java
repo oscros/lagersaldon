@@ -15,7 +15,7 @@ public class InventoryTest {
     @ValueSource(ints = { 0, 100, 1000000 })
     public void testGetInventory(int actualQuantity) {
         Inventory inventory = new Inventory();
-        inventory.addInventory(actualQuantity);
+        inventory.addItems(actualQuantity);
 
         assertEquals(actualQuantity, inventory.getInventory());
     }
@@ -31,7 +31,7 @@ public class InventoryTest {
     @ValueSource(ints = { 0, 100, 1000000 })
     public void testAddInventory(int actualQuantity) {
         Inventory inventory = new Inventory();
-        inventory.addInventory(actualQuantity);
+        inventory.addItems(actualQuantity);
 
         assertEquals(actualQuantity, inventory.getInventory());
     }
@@ -40,8 +40,8 @@ public class InventoryTest {
     public void testUnsuccessfullAddInventory() {
         Inventory inventory = new Inventory();
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            inventory.addInventory(-100);
+        assertThrows(IllegalArgumentException.class, () -> {
+            inventory.addItems(-100);
         });
     }
 
@@ -49,9 +49,9 @@ public class InventoryTest {
     @ValueSource(ints = { 0, 100, 10000000 })
     public void testSuccessfullRemoveInventory(int quantityToRemove) throws IllegalArgumentException {
         Inventory inventory = new Inventory();
-        inventory.addInventory(quantityToRemove);
+        inventory.addItems(quantityToRemove);
 
-        inventory.removeInventory(quantityToRemove);
+        inventory.removeItems(quantityToRemove);
 
         assertEquals(0, inventory.getInventory());
     }
@@ -61,8 +61,8 @@ public class InventoryTest {
     public void testUnsuccessfullRemoveInventory(int quantityToRemove) {
         Inventory inventory = new Inventory();
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            inventory.removeInventory(quantityToRemove);
+        assertThrows(IllegalArgumentException.class, () -> {
+            inventory.removeItems(quantityToRemove);
         });
     }
 }

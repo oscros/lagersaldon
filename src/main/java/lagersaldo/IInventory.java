@@ -1,7 +1,7 @@
 package lagersaldo;
 
 public interface IInventory {
-    public void addInventory(int quantity);
-    public void removeInventory(int quantity);
+    public void addItems(int quantity);
+    public void removeItems(int quantity);
     public int getInventory();
 }

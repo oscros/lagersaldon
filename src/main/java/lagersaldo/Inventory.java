@@ -4,10 +4,6 @@ public class Inventory implements IInventory {
 
     private int inventory;
 
-    public Inventory() {
-        inventory = 0;
-    }
-
     private boolean isWithdrawalValid(int amountToWithdraw) {
         if (inventory >= amountToWithdraw && amountToWithdraw > -1) {
             return true;
@@ -22,7 +18,7 @@ public class Inventory implements IInventory {
         return false;
     }
 
-    public void addInventory(int quantity) throws IllegalArgumentException {
+    public void addItems(int quantity) throws IllegalArgumentException {
         if (isDepositValid(quantity)) {
             inventory += quantity;
         } else {
@@ -30,7 +26,7 @@ public class Inventory implements IInventory {
         }
     }
 
-    public void removeInventory(int quantity) throws IllegalArgumentException {
+    public void removeItems(int quantity) throws IllegalArgumentException {
         if (isWithdrawalValid(quantity)) {
             inventory -= quantity;
         } else {
