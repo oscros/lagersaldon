@@ -17,23 +17,28 @@ import static org.mockito.Mockito.when;
 public class SellInventoryActionTest {
     @Test
     public void testDoAction() {
-        SellInventoryAction sellAction = new SellInventoryAction(10);
+        SellInventoryAction sellActionType = new SellInventoryAction(10);
         Inventory mockInventory = mock(Inventory.class);
 
-        doAnswer(new Answer<Void>() {
-            public Void answer(InvocationOnMock invocation) {
-                return null;
-            }
-        }).when(mockInventory).removeInventory(anyInt());
+        doAnswer(invocation -> {
+            return null;
+        }).when(mockInventory).removeItems(anyInt());
 
-        sellAction.doAction(mockInventory);
-        verify(mockInventory, times(1)).removeInventory(anyInt());;
+        sellActionType.doAction(mockInventory);
+        verify(mockInventory, times(1)).removeItems(anyInt());;
+    }
+
+    @Test
+    public void testGetActionType() {
+        SellInventoryAction sellActionType = new SellInventoryAction(10);
+
+        assertEquals(ActionType.Sell, sellActionType.getActionType());
     }
 
     @Test
     public void testGetResult() {
-        SellInventoryAction sellAction = new SellInventoryAction(10);
+        SellInventoryAction sellActionType = new SellInventoryAction(10);
 
-        assertEquals(null, sellAction.getResult());
+        assertEquals(null, sellActionType.getResult());
     }
 }

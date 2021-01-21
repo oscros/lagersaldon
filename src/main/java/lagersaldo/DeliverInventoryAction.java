@@ -1,11 +1,16 @@
 package lagersaldo;
 
-public class DeliverInventoryAction implements IInventoryAction{
+public class DeliverInventoryAction implements IInventoryAction {
 
     private int quantity;
 
     public DeliverInventoryAction(int quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public ActionType getActionType() {
+        return ActionType.Deliver;
     }
 
     @Override
@@ -15,7 +20,7 @@ public class DeliverInventoryAction implements IInventoryAction{
 
     @Override
     public void doAction(IInventory inventory) throws IllegalArgumentException {
-        inventory.addInventory(quantity);
+        inventory.addItems(quantity);
     }
-    
+
 }

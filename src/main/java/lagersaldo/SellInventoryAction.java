@@ -9,13 +9,18 @@ public class SellInventoryAction implements IInventoryAction {
     }
 
     @Override
+    public ActionType getActionType() {
+        return ActionType.Sell;
+    }
+
+    @Override
     public Void getResult() {
         return null;
     }
 
     @Override
     public void doAction(IInventory inventory) {
-        inventory.removeInventory(quantity);
+        inventory.removeItems(quantity);
     }
     
 }

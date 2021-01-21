@@ -15,23 +15,28 @@ import static org.mockito.Mockito.when;
 public class DeliverInventoryTest {
     @Test
     public void testDoAction() {
-        DeliverInventoryAction deliverAction = new DeliverInventoryAction(10);
+        DeliverInventoryAction deliverActionType = new DeliverInventoryAction(10);
         Inventory mockInventory = mock(Inventory.class);
 
-        doAnswer(new Answer<Void>() {
-            public Void answer(InvocationOnMock invocation) {
-                return null;
-            }
-        }).when(mockInventory).removeInventory(anyInt());
+        doAnswer(invocation -> {
+            return null;
+        }).when(mockInventory).removeItems(anyInt());
 
-        deliverAction.doAction(mockInventory);
-        verify(mockInventory, times(1)).addInventory(anyInt());
+        deliverActionType.doAction(mockInventory);
+        verify(mockInventory, times(1)).addItems(anyInt());
+    }
+
+    @Test
+    public void testGetActionType() {
+        DeliverInventoryAction deliverActionType = new DeliverInventoryAction(10);
+
+        assertEquals(ActionType.Deliver, deliverActionType.getActionType());
     }
 
     @Test
     public void testGetResult() {
-        DeliverInventoryAction deliverAction = new DeliverInventoryAction(10);
+        DeliverInventoryAction deliverActionType = new DeliverInventoryAction(10);
 
-        assertEquals(null, deliverAction.getResult());
-        }
+        assertEquals(null, deliverActionType.getResult());
+    }
 }
