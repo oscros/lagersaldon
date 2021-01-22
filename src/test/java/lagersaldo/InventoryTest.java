@@ -15,7 +15,7 @@ public class InventoryTest {
     @ValueSource(ints = { 0, 100, 1000000 })
     public void testGetInventory(int actualQuantity) {
         Inventory inventory = new Inventory();
-        inventory.addItems(actualQuantity);
+        inventory.setInventoryForTest(actualQuantity);
 
         assertEquals(actualQuantity, inventory.getInventory());
     }
@@ -31,7 +31,7 @@ public class InventoryTest {
     @ValueSource(ints = { 0, 100, 1000000 })
     public void testAddInventory(int actualQuantity) {
         Inventory inventory = new Inventory();
-        inventory.addItems(actualQuantity);
+        inventory.setInventoryForTest(actualQuantity);
 
         assertEquals(actualQuantity, inventory.getInventory());
     }
@@ -49,7 +49,7 @@ public class InventoryTest {
     @ValueSource(ints = { 0, 100, 10000000 })
     public void testSuccessfullRemoveInventory(int quantityToRemove) throws IllegalArgumentException {
         Inventory inventory = new Inventory();
-        inventory.addItems(quantityToRemove);
+        inventory.setInventoryForTest(quantityToRemove);
 
         inventory.removeItems(quantityToRemove);
 

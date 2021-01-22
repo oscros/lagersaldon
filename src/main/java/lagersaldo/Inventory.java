@@ -1,8 +1,15 @@
 package lagersaldo;
 
+import com.google.common.annotations.VisibleForTesting;
+
 public class Inventory implements IInventory {
 
     private int inventory;
+
+    @VisibleForTesting
+    protected void setInventoryForTest(int quantity) {
+        inventory = quantity;
+    }
 
     private boolean isWithdrawalValid(int amountToWithdraw) {
         if (inventory >= amountToWithdraw && amountToWithdraw > -1) {
