@@ -32,14 +32,15 @@ public class ViewTest {
         System.setOut(originalOut);
     }
 
-    @Test
-    public void testPrintRetrieveResult() {
+    private RetrieveInventoryAction givenPerformedRetrieveAction() {
         RetrieveInventoryAction retrieveAction = new RetrieveInventoryAction();
         Inventory mockInventory = mock(Inventory.class);
         when(mockInventory.getInventory()).thenReturn(10);
         retrieveAction.doAction(mockInventory);
-        // System.setOut(originalOut);
-        View.printResult(retrieveAction);
+        return retrieveAction;
+    }
+
+    private void assertRetrieveActionWasPrinted() {
         String actual = outContent.toString();
         outContent.reset();
         System.out.println("Current inventory: " + 10);
@@ -48,8 +49,7 @@ public class ViewTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void testPrintDeliverResult() {
+    private DeliverInventoryAction givenPerformedDeliverAction() {
         DeliverInventoryAction deliverAction = new DeliverInventoryAction(10);
         Inventory mockInventory = mock(Inventory.class);
         doAnswer(invocation -> {
@@ -57,18 +57,10 @@ public class ViewTest {
         }).when(mockInventory).removeItems(anyInt());
 
         deliverAction.doAction(mockInventory);
-        // System.setOut(originalOut);
-        View.printResult(deliverAction);
-        String actual = outContent.toString();
-        outContent.reset();
-        System.out.println("done");
-        String expected = outContent.toString();
-
-        assertEquals(expected, actual);
+        return deliverAction;
     }
 
-    @Test
-    public void testPrintSellResult() {
+    private SellInventoryAction givenPerformedSellAction() {
         SellInventoryAction sellAction = new SellInventoryAction(10);
         Inventory mockInventory = mock(Inventory.class);
         doAnswer(invocation -> {
@@ -76,13 +68,42 @@ public class ViewTest {
         }).when(mockInventory).removeItems(anyInt());
 
         sellAction.doAction(mockInventory);
-        // System.setOut(originalOut);
-        View.printResult(sellAction);
+        return sellAction;
+    }
+
+    private void assertDoneWasPrinted() {
         String actual = outContent.toString();
         outContent.reset();
         System.out.println("done");
         String expected = outContent.toString();
-
         assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testPrintRetrieveResult() {
+        RetrieveInventoryAction performedRetrieveAction = givenPerformedRetrieveAction();
+
+        View.printResult(performedRetrieveAction);
+
+        assertRetrieveActionWasPrinted();
+    }
+
+    @Test
+    public void testPrintDeliverResult() {
+        DeliverInventoryAction deliverAction = givenPerformedDeliverAction();
+
+        View.printResult(deliverAction);
+
+        assertDoneWasPrinted();
+    }
+
+    @Test
+    public void testPrintSellResult() {
+        SellInventoryAction sellAction = givenPerformedSellAction();
+
+        View.printResult(sellAction);
+        
+        assertDoneWasPrinted();
     }
 }
