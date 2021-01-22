@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class InputParser {
 
-    private static boolean isValidInput(String input) {
+    public static boolean isValidInput(String input) {
         String validActionTypePattern = "^([SI]{1}\\d{1,6})$|^L$";
         Pattern validPattern = Pattern.compile(validActionTypePattern);
         Matcher matcher = validPattern.matcher(input);

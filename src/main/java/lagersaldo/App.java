@@ -10,13 +10,12 @@ public class App {
         IInventory inventory = new Inventory();
         while (true) {
             String input = in.nextLine();
-            try {
+            if (InputParser.isValidInput(input)) {
                 IInventoryAction action = InputParser.parseInput(input);
                 action.doAction(inventory);
                 View.printResult(action);
-                System.out.println();
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+            } else {
+                System.err.println("Invalid input: " + input);
             }
         }
     }
