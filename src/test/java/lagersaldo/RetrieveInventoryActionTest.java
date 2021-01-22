@@ -33,6 +33,6 @@ public class RetrieveInventoryActionTest {
     public void testGetResult() {
         RetrieveInventoryAction retrieveActionType = new RetrieveInventoryAction();
 
-        assertEquals(anyInt(), retrieveActionType.getResult().getClass());
+        assertEquals(Integer.class, retrieveActionType.getResult().getClass());
     }
 }

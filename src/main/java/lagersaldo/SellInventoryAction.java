@@ -13,6 +13,9 @@ public class SellInventoryAction implements IInventoryAction {
         return ActionType.Sell;
     }
 
+    /**
+     * Always returns null since this actions doesn't have any results
+     */
     @Override
     public Void getResult() {
         return null;
