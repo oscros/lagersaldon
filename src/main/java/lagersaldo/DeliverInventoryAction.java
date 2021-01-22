@@ -13,6 +13,9 @@ public class DeliverInventoryAction implements IInventoryAction {
         return ActionType.Deliver;
     }
 
+    /**
+     * Always returns null since this actions doesn't have any results
+     */
     @Override
     public Void getResult() {
         return null;
