@@ -12,6 +12,7 @@ The inventory always start at 0 when the program starts.
 ## Additional restrictions on commands:
 1. User cannot sell or deliver a negative number of goods.
 2. User cannot overdraw the inventory by selling more goods than are currently in it.
+3. A maximum limit of 6 digits can be passed together with the commands "S" and "I"
 
 ## Running project locally with gradle
     ./gradlew run
