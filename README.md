@@ -24,7 +24,7 @@ which contains the executable bin\lagersaldo
 ## Running tests
     ./gradlew test
 
-Rr to run single testfile
+To run single testfile
 
     ./gradlew test --tests="<fileName>"
 
